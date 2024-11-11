@@ -1,0 +1,190 @@
+---
+title: "RWorksheet_Buenvenida#4a.Rmd"
+author: "me"
+date: "2024-10-23"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. The table below shows the data about shoe size and height. Create a data frame.
+a. Describe the data.
+
+```{r}
+HouseHoldData <- data.frame (
+  ShoeSize = c(6.5, 9.0, 8.5, 8.5, 10.5, 7.0, 9.5, 9.0, 13.0, 7.5, 10.5, 8.5, 12.0, 10.5, 13.0, 11.5, 8.5, 5.0, 10.0, 6.5, 7.5, 8.5, 10.5, 8.5, 10.5,  11.0, 9.0, 13.0),
+  
+  Height = c(66.0, 68.0, 64.5, 65.0, 70.0, 64.0, 70.0, 71.0, 72.0, 64.0, 74.5, 67.0, 71.0, 71.0, 77.0, 72.0, 59.0, 62.0, 72.0, 66.0, 64.0, 67.0, 73.0, 69.0, 72.0, 70.0, 69.0, 70.0),
+  
+  Gender = c("F", "F", "F", "F","M", "F", "F", "F","M","F","M","F","M","M", "M", "M", "F", "F", "M", "F", "F","M", "M", "F","M","M", "M", "M")
+)
+
+HouseHoldData
+```
+
+b. Create a subset by males and females with their corresponding shoe size and height.
+What its result? Show the R scripts.
+
+```{r}
+males <- subset(HouseHoldData, Gender == "M")
+females <- subset(HouseHoldData, Gender == "F")
+males
+females
+```
+
+c. Find the mean of shoe size and height of the respondents. Write the R scripts and its
+result.
+
+
+
+```{r}
+mean_shoe_size <- mean(HouseHoldData$ShoeSize)
+
+mean_height <- mean(HouseHoldData$Height)
+
+mean_shoe_size
+mean_height
+```
+
+
+d. Is there a relationship between shoe size and height? Why?
+
+there is a moderate positive correlation between shoe size and height, indicating that individuals with larger shoe sizes tend to be taller.
+
+
+2. Construct character vector months to a factor with factor() and assign the result to
+factor_months_vector. Print out factor_months_vector and assert that R prints out
+the factor levels below the actual values.
+
+```{r}
+months_vector <- c("March", "April", "January", "November", "January",
+                   "September", "October", "September", "November", "August",
+                   "January", "November", "November", "February", "May", "August",
+                   "July", "December", "August", "August", "September", "November", 
+                   "February", "April")
+factor_months_vector <- factor(months_vector)
+months_vector
+
+```
+
+
+3. Then check the summary() of the months_vector and factor_months_vector. | Inter-
+pret the results of both vectors. Are they both equally useful in this case?
+
+```{r}
+summary_months_vector <- summary(months_vector)
+summary_factor_months_vector <- summary(factor_months_vector)
+
+summary_months_vector
+summary_factor_months_vector
+```
+
+4. Create a vector and factor for the table below.
+```{r}
+direction <- c("East", "West", "North")
+
+frequency <- c(1, 4, 3)
+
+factord <- direction
+new_order <- factor(factord, levels = c("East", "West", "North"))
+
+new_order
+
+```
+
+5. 
+```{r}
+#a
+data <- read.table("import_march.csv", header = TRUE, sep = ",")
+```
+```{r}
+#b
+data
+```
+
+6.Full Search
+```{r}
+exhaustiveS <- function() {
+  number <- suppressWarnings(as.integer(readline(prompt = "Select a number between 1 and 50: ")))
+  if (is.na(number)) {
+    print("Invalid input. Please enter a number.")
+  } else if (number < 1 || number > 50) {
+    print("The number selected is beyond the range of 1 to 50")
+  } else if (number == 20) {
+    print(TRUE)
+  } else {
+    print(number)
+  }
+}
+exhaustiveS()
+```
+
+
+7. Change
+
+```{r}
+min_bills <- function(price) {
+  bills <- c(1000, 500, 200, 100, 50)
+  count <- 0
+  for (bill in bills) {
+    
+    while (price >= bill) {
+      price <- price - bill  
+      count <- count + 1   
+    }
+  }
+  return(count)
+}
+snack_price <- 2700
+cat("Minimum number of bills needed:", min_bills(snack_price), "\n")
+```
+8.
+
+```{r}
+# a
+grades <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+print(grades)
+```
+```{r}
+# b
+for (i in 1:nrow(grades)) {
+  avg <- sum(grades[i, 2:5]) / 4
+  print(paste(grades$Name[i], "'s average grade this semester is", avg))
+}
+```
+```{r}
+# c
+for (j in 2:5) {
+  avg_test <- mean(grades[,j])
+  if (avg_test < 80) {
+    print(paste("The", j-1, "test was difficult with an average score of", avg_test))
+  }
+}
+```
+```{r}
+# d
+for (i in 1:nrow(grades)) {
+  highest_score <- grades[i, 2]  
+  for (j in 3:5) {  
+    if (grades[i, j] > highest_score) {
+      highest_score <- grades[i, j]
+    }
+  }
+  if (highest_score > 90) {
+    print(paste(grades$Name[i], "'s highest grade this semester is", highest_score))
+  }
+}
+```
+
+
+
